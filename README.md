@@ -85,8 +85,7 @@ Moonlight官网：https://moonlight-stream.org/
 
 注意！此时电脑的 ip 地址已发生改变，在状态栏右击 Zerotier 图标，查看 Managed Addresses 中的 ip 地址，这就是你的电脑在 Moonlight 中所需填入的公网 ip 地址。
 
-![image](https://github.com/user-attachments/assets/66381365-5dd9-4c49-8b9f-a8ca6487b968)
-
+![image](https://github.com/user-attachments/assets/d3bce89a-7b1d-42a1-bbc6-c44f47965a5d)
 
 配置平板的 Zerotier，由于貌似只有 ios 的美区应用商店才可下载，安卓端找到一个支持的 ZerotierFix：https://github.com/kaaass/ZerotierFix/releases/tag/1.0.10
 
