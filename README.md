@@ -55,7 +55,7 @@ Moonlight官网：https://moonlight-stream.org/
 
 在平板的 Moonlight 添加电脑 ip 地址（ 在 WLAN 属性中查看 IPv4 地址，校园网一般为 10. 开头），连接成功则局域网下的串流配置没问题。
 
-### 2. ZerotierFix内网穿透
+### 2. ZerotierFix 内网穿透
 
 由于校园网可能会有内网隔离/保护问题，导致在共享电脑 Wifi 时能连接到电脑，但在连同一校园网 Wifi 时会被墙。
 
@@ -65,7 +65,7 @@ Moonlight官网：https://moonlight-stream.org/
 
 注：如果不是使用校园网，几种可能的解决方案：https://www.bilibili.com/opus/500980726464030822
 
-参考教程：https://zhuanlan.zhihu.com/p/585817694
+推荐！参考教程：https://zhuanlan.zhihu.com/p/585817694
 
 进入 Zerotier 官网注册：https://www.zerotier.com/
 
@@ -83,6 +83,11 @@ Moonlight官网：https://moonlight-stream.org/
 
 ![image](https://github.com/user-attachments/assets/dad07810-56b8-40c7-be99-07f44162c79f)
 
+注意！此时电脑的 ip 地址已发生改变，在状态栏右击 Zerotier 图标，查看 Managed Addresses 中的 ip 地址，这就是你的电脑在 Moonlight 中所需填入的公网 ip 地址。
+
+![image](https://github.com/user-attachments/assets/66381365-5dd9-4c49-8b9f-a8ca6487b968)
+
+
 配置平板的 Zerotier，由于貌似只有 ios 的美区应用商店才可下载，安卓端找到一个支持的 ZerotierFix：https://github.com/kaaass/ZerotierFix/releases/tag/1.0.10
 
 下载安装 app-release.apk 在右下角点击添加，输入之前的网络 ID ( 即前述 NETWORK ID )：
@@ -91,6 +96,6 @@ Moonlight官网：https://moonlight-stream.org/
 
 同样回到官网后台界面，在出现的未加入网络的设备ID信息前打勾。
 
-平板端重新开启连接，显示成功连接至 ... ( NETWORK ID )，则表明内网穿透完成，此时重新回到 Moonlight，已可识别到之前加入的电脑。
+平板端重新开启连接，显示成功连接至 ... ( NETWORK ID )，则表明内网穿透完成，此时重新回到 Moonlight，添加刚刚记录的公网 ip 地址，即可识别到 PC 端。
 
 
