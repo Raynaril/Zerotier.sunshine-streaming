@@ -93,8 +93,11 @@ Moonlight官网：https://moonlight-stream.org/
 
 ![abe7a55b597c185be6565d3afe239c1](https://github.com/user-attachments/assets/7a77640d-4cb9-4048-a49f-8c540ce0d9be)
 
-同样回到官网后台界面，在出现的未加入网络的设备ID信息前打勾。
+同样回到官网后台界面，在出现的未加入网络的设备 ID 信息前打勾。
 
 平板端重新开启连接，显示成功连接至 ... ( NETWORK ID )，则表明内网穿透完成，此时重新回到 Moonlight，添加刚刚记录的公网 ip 地址，即可识别到 PC 端。
+
+![image](https://github.com/user-attachments/assets/cd73f7ed-9e3f-4124-8147-7498f15eb337)
+
 
 
