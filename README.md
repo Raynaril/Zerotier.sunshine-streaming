@@ -1,10 +1,21 @@
-# Sunshine/Moonlight+ZerotierFix 低延迟 Pad 远程串流 PC 主力机
+# Sunshine/Moonlight + 内网穿透方案：极低延迟 Pad 远程串流 PC
 
-Motivation：主力机游戏本携带困难，特别是教室上课没有电源很伤。由于宿舍-教室-工位均覆盖校园网环境，考虑将主力机固定在工位，通过内网串流的方式低延迟 Pad 访问，另外购置了 pxx 海外版 Matepad 磁吸键盘，小巧 ( 键盘保护壳一体 ) 且性价比高 ( 50r ) ，搭配逻辑 M240 几乎只相当于多带一本书。以下记录串流配置的详细过程，仅供参考。
+**硬件配置：** HUAWEI MatePad 11 2021 ( 磁吸键盘 / 罗技 M240 ） + 宏碁 Nitro AN515-45
 
-硬件配置：HUAWEI MatePad 11 2021 + 宏碁 Nitro AN515-45
+**网络环境：** Campus network of Southeast University, Jiulonghu Campus.
 
-网络环境：Campus network of Southeast University, Jiulonghu Campus.
+**Motivation：** 由于游戏本携带困难，特别是续航问题令人头疼。同时 宿舍 - 教室 - 工位 均覆盖校园网环境，其本质可以看成一个巨大的内网，理论上能够以极低延迟跑满带宽极限，故采用内网穿透的方案远程访问 PC 主机。目前主流的内网穿透方案有 Zerotier、Tailscale 等等，下面将进行逐一分析。
+
+
+**2024/11/29 更新：完整方案** 
+
+1. 主力机 PC 固定工位
+
+2. 日常宿舍 / 水课远程访问：IPv6 直连 ( 详见 Part3 )
+
+3. 组会 / 工位：使用 Tailscale 虚拟组网进行内网穿透 ( 详见 Part4 )
+
+原因：校园网环境在同一局域网下会进行 AP 隔离，无法通过 IPv6 直接访问，相比于一开始使用的 Zerotier，Tailscale 有着更低的延迟和稳定性。
 
 ### 1. Sunshine/Moonlight 串流配置
 
@@ -58,7 +69,7 @@ Moonlight官网：https://moonlight-stream.org/
 
 在平板的 Moonlight 添加电脑 ip 地址 ( 在 WLAN 属性中查看 IPv4 地址，校园网一般为 10. 开头 ) ，连接成功则局域网下的串流配置没问题。
 
-### 2. ZerotierFix 内网穿透 ( 校园网环境强烈推荐跳过2.使用新方案3. ) 
+### 2. Zerotier 内网穿透 ( 推荐 Part4:Tailscale 延迟更低更稳定 ) 
 
 由于校园网可能会有内网隔离/保护问题，导致在共享电脑 Wifi 时能连接到电脑，但在连同一校园网 Wifi 时会被墙。
 
@@ -128,12 +139,22 @@ Moonlight官网：https://moonlight-stream.org/
 
 记录 PC 端的公网 IPv6 地址，在平板端添加设备，输入对应的 IPv6 地址，[ 注意 ]：IPv6 地址需要用 [] 括起来。
 
-IPv6 校园网串流效果：宿舍 → 工位几乎无延迟 2K 90fps 丝滑无卡顿
+IPv6 校园网串流效果：宿舍 → 工位 几乎无延迟 2K 90fps 丝滑无卡顿
 
 ![5a36a2ea47da0f015070d6e18fff119](https://github.com/user-attachments/assets/78d12930-5d0a-43e8-81f7-cfafb6173266)
 
 注意此处的渲染帧数低于接受帧数，只需要把 Moonlight 端的配置：视频帧速调节更改为 有FPS限制的平衡 即可，实测 90 甚至 120 帧都无压力。
 
 ![2336267b9422823013c9b850d93dd5f](https://github.com/user-attachments/assets/dcae08af-b1a4-4707-8323-6d2a92392c65)
+
+### 4. Tailscale 内网穿透
+
+一般场景下使用 IPv6 表现出色，但在工位开组会时发现无法搜索到对应电脑，猜测应该是对同一局域网内作了 AP 隔离，网上方案大多都比较复杂，有修改路由表通过网关转发的，也有使用内网穿透工具的，而之前提到的 Zerotier 在实际使用过程中一直表现不佳，大概只能跑到 720p 60fps，还满足不了日常的使用需求。Tailscale 使用感受就丝滑了很多，延迟与 IPv6 直连相当。
+
+进入 Tailscale 官网下载 Windows 版本：https://tailscale.com/download
+
+由于官网的 Tailscale for Android 需要使用 Google play，而 apk mirror 上都是 apk 的捆绑包，最终选择官方提供的 Github：https://github.com/tailscale/tailscale-android
+
+配置方面甚至比 Zerotier 还要容易，只需登录相同的 GitHub 账号就能自动连接，可以在 https://login.tailscale.com/admin/machines 中查看虚拟局域网中主机的 ip 地址，在 moonlight 中添加即可。
 
 
